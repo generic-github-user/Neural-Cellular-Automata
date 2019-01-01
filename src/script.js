@@ -16,7 +16,24 @@ for (var i = 0; i < resolution.y; i++) {
 const render = function(cells) {
       for (var i = 0; i < cells.length; i++) {
             for (var j = 0; j < cells[i].length; j++) {
-                  ctx.fillStyle = "hsla(" + cells[i][j] * 50 + ", 100%, 50%, 1)";
+                  if (range) {
+                        // https://stackoverflow.com/a/39342975
+                        var minRow = cells.map(function(row) {
+                              return Math.min.apply(Math, row);
+                        });
+                        var maxRow = cells.map(function(row) {
+                              return Math.max.apply(Math, row);
+                        });
+                        // Find minimum and maximum values of cells for range mapping
+                        var min = Math.min(...minRow);
+                        var max = Math.max(...maxRow);
+
+                        var hue = map(cells[i][j], min, max, 0, 100);
+                  } else {
+                        var hue = cells[i][j] * 100 + 200;
+                  }
+
+                  ctx.fillStyle = "hsla(" + hue + ", 100%, 50%, 1)";
                   ctx.fillRect(j * cell_width, i * cell_height, cell_width, cell_height);
             }
       }
