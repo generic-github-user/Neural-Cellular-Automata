@@ -26,9 +26,14 @@ const predict = function(x, y) {
 
 }
 
-var last_state = JSON.parse(JSON.stringify(cells));
-for (var i = 0; i < cells.length; i++) {
-      for (var j = 0; j < cells[i].length; j++) {
-            // cells[i][j] = predict(j, i);
+const update = function() {
+      var last_state = JSON.parse(JSON.stringify(cells));
+      for (var i = 0; i < cells.length; i++) {
+            for (var j = 0; j < cells[i].length; j++) {
+                  // cells[i][j] = predict(j, i);
+            }
       }
+      render(cells);
 }
+
+setInterval(update, 100);
