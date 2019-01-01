@@ -39,16 +39,15 @@ const render = function(cells) {
       }
 }
 
-const predict = function(x, y) {
+const predict = function(cellset, x, y) {
       inputs = [];
       for (var i = 0; i < 3; i++) {
-            var row = [];
             for (var j = 0; j < 3; j++) {
                   var location = {
                         "x": x + j - Math.floor(3 / 2),
                         "y": y + i - Math.floor(3 / 2)
                   };
-                  // if (location.x < 0 || location.x > cellset[0].length) {
+                  // if (location.x < 0 || location.x >= cellset[0].length) {
                   //       location.x = 0;
                   // }
                   if (location.y < 0 || location.y >= cellset.length) {
@@ -58,9 +57,8 @@ const predict = function(x, y) {
                   if (cell === undefined) {
                         cell = 0;
                   }
-                  row.push(cell);
+                  inputs.push(cell);
             }
-            inputs.push(row);
       }
       var output = inputs;
 
