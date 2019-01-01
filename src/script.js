@@ -39,15 +39,17 @@ const render = function(cells) {
       }
 }
 
-const w1 = tf.randomUniform([9, 9]);
-const w2 = tf.randomUniform([9, 1]);
+var nc = neighbor_cells;
+var bs = block_size;
+const w1 = tf.randomUniform([nc, nc]);
+const w2 = tf.randomUniform([nc, 1]);
 const predict = function(cellset, x, y) {
-      inputs = [];
-      for (var i = 0; i < 3; i++) {
-            for (var j = 0; j < 3; j++) {
+      var inputs = [];
+      for (var i = 0; i < bs; i++) {
+            for (var j = 0; j < bs; j++) {
                   var location = {
-                        "x": x + j - Math.floor(3 / 2),
-                        "y": y + i - Math.floor(3 / 2)
+                        "x": x + j - Math.floor(bs / 2),
+                        "y": y + i - Math.floor(bs / 2)
                   };
                   // if (location.x < 0 || location.x >= cellset[0].length) {
                   //       location.x = 0;
