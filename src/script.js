@@ -41,8 +41,9 @@ const render = function(cells) {
 
 var nc = neighbor_cells;
 var bs = block_size;
-const w1 = tf.randomUniform([nc, nc]);
-const w2 = tf.randomUniform([nc, 1]);
+const sub = tf.scalar(0.5);
+const w1 = tf.randomUniform([nc, nc]).sub(sub);
+const w2 = tf.randomUniform([nc, 1]).sub(sub);
 const predict = function(cellset, x, y) {
       var inputs = [];
       for (var i = 0; i < bs; i++) {
@@ -65,7 +66,7 @@ const predict = function(cellset, x, y) {
             }
       }
       var output = tf.tensor2d(inputs, [1, nc]).matMul(w2);
-      output.print()
+
       return output.dataSync()[0];
 }
 
