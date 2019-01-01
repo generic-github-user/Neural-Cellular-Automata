@@ -53,4 +53,4 @@ const update = function() {
       render(cells);
 }
 
-setInterval(update, 100);
+setInterval(update, 1000);

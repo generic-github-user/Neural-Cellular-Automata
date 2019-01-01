@@ -1,5 +1,5 @@
 var resolution = {
-      "x": 50,
+      "x": 100,
       "y": 100
 };
 var range = false;
