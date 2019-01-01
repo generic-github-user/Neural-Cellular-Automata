@@ -39,6 +39,8 @@ const render = function(cells) {
       }
 }
 
+const w1 = tf.randomUniform([9, 9]);
+const w2 = tf.randomUniform([9, 1]);
 const predict = function(cellset, x, y) {
       inputs = [];
       for (var i = 0; i < 3; i++) {
@@ -54,15 +56,15 @@ const predict = function(cellset, x, y) {
                         location.y = 0;
                   }
                   var cell = cellset[location.y][location.x];
-                  if (cell === undefined) {
+                  if (cell == undefined) {
                         cell = 0;
                   }
                   inputs.push(cell);
             }
       }
-      var output = inputs;
+      var output = tf.tensor2d(inputs, [1, 9]).matMul(w2);
 
-      return 0;
+      return output.dataSync()[0][0];
 }
 
 const update = function() {
