@@ -1,3 +1,6 @@
+var canvas = document.querySelector("#canvas");
+var ctx = canvas.getContext("2d");
+
 var cells = [];
 for (var i = 0; i < 50; i++) {
       var row = [];
