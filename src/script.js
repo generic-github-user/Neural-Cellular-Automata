@@ -40,14 +40,38 @@ const render = function(cells) {
 }
 
 const predict = function(x, y) {
+      inputs = [];
+      for (var i = 0; i < 3; i++) {
+            var row = [];
+            for (var j = 0; j < 3; j++) {
+                  var location = {
+                        "x": x + j - Math.floor(3 / 2),
+                        "y": y + i - Math.floor(3 / 2)
+                  };
+                  // if (location.x < 0 || location.x > cellset[0].length) {
+                  //       location.x = 0;
+                  // }
+                  if (location.y < 0 || location.y >= cellset.length) {
+                        location.y = 0;
+                  }
+                  var cell = cellset[location.y][location.x];
+                  if (cell === undefined) {
+                        cell = 0;
+                  }
+                  row.push(cell);
+            }
+            inputs.push(row);
+      }
+      var output = inputs;
 
+      return 0;
 }
 
 const update = function() {
       var last_state = JSON.parse(JSON.stringify(cells));
       for (var i = 0; i < cells.length; i++) {
             for (var j = 0; j < cells[i].length; j++) {
-                  // cells[i][j] = predict(j, i);
+                  cells[i][j] = predict(last_state, j, i);
             }
       }
       render(cells);
