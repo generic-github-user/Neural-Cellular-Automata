@@ -51,9 +51,9 @@ const predict = function(cellset, x, y) {
                         "x": x + j - Math.floor(bs / 2),
                         "y": y + i - Math.floor(bs / 2)
                   };
-                  // if (location.x < 0 || location.x >= cellset[0].length) {
-                  //       location.x = 0;
-                  // }
+                  if (location.x < 0 || location.x >= cellset[0].length) {
+                        location.x = 0;
+                  }
                   if (location.y < 0 || location.y >= cellset.length) {
                         location.y = 0;
                   }
@@ -64,9 +64,9 @@ const predict = function(cellset, x, y) {
                   inputs.push(cell);
             }
       }
-      var output = tf.tensor2d(inputs, [1, 9]).matMul(w2);
-
-      return output.dataSync()[0][0];
+      var output = tf.tensor2d(inputs, [1, nc]).matMul(w2);
+      output.print()
+      return output.dataSync()[0];
 }
 
 const update = function() {

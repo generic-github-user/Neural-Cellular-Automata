@@ -2,8 +2,8 @@ var resolution = {
       "x": 10,
       "y": 10
 };
-var range = false;
-var block_size = 3;
+var range = true;
+var block_size = 5;
 var neighbor_cells = block_size ** 2;
 
 var cell_width = canvas.width / resolution.x;
