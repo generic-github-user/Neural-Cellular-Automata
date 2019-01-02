@@ -4,6 +4,12 @@ const map = function(num, in_min, in_max, out_min, out_max) {
       return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
+tf.randomUniformScaled = function(shape, range) {
+      var min = range[0];
+      var max = range[1];
+      return tf.randomUniform(shape).mul(tf.scalar(max - min)).add(tf.scalar(min));
+}
+
 var cells = [];
 for (var i = 0; i < resolution.y; i++) {
       var row = [];
@@ -41,11 +47,11 @@ const render = function(cells) {
 
 var nc = neighbor_cells;
 var bs = block_size;
-const sub = tf.scalar(0.5);
-const w1 = tf.randomUniform([nc, nc]).sub(sub);
-const b1 = tf.randomUniform([nc, 1]).sub(sub);
-const w2 = tf.randomUniform([nc, 1]).sub(sub);
-const b2 = tf.randomUniform([1, 1]).sub(sub);
+const sub = tf.scalar(0);
+const w1 = tf.randomUniformScaled([nc, nc], ranges.weights);
+const b1 = tf.randomUniformScaled([nc, 1], ranges.biases);
+const w2 = tf.randomUniformScaled([nc, 1], ranges.weights);
+const b2 = tf.randomUniformScaled([1, 1], ranges.biases);
 const predict = function(cellset, x, y) {
       var inputs = [];
       for (var i = 0; i < bs; i++) {
@@ -82,4 +88,4 @@ const update = function() {
       render(cells);
 }
 
-setInterval(update, 1000);
+setInterval(update, 100);
