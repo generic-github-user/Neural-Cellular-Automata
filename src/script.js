@@ -14,7 +14,7 @@ var cells = [];
 for (var i = 0; i < resolution.y; i++) {
       var row = [];
       for (var j = 0; j < resolution.x; j++) {
-            row.push(Math.random());
+            row.push(Math.random() - 0.5);
       }
       cells.push(row);
 }
@@ -73,9 +73,16 @@ const predict = function(cellset, x, y) {
                   inputs.push(cell);
             }
       }
-      var output = tf.tensor2d(inputs, [1, nc]).matMul(w2);
+      var output = tf.tensor2d(inputs, [1, nc]).matMul(w2).dataSync()[0];
+      if (values == "discrete") {
+            if (output >= 0) {
+                  output = 1;
+            } else if (output < 0) {
+                  output = -1;
+            }
+      }
 
-      return output.dataSync()[0];
+      return output;
 }
 
 const update = function() {

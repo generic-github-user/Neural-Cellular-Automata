@@ -9,6 +9,7 @@ var ranges = {
       "weights": [-1, 1],
       "biases": [-1, 1]
 };
+var values = "discrete";
 
 var cell_width = canvas.width / resolution.x;
 var cell_height = canvas.height / resolution.y;
