@@ -10,6 +10,8 @@ var ranges = {
       "biases": [-1, 1]
 };
 var values = "discrete";
+var enable_limits = false;
+var limits = [-10, 10];
 
 var cell_width = canvas.width / resolution.x;
 var cell_height = canvas.height / resolution.y;

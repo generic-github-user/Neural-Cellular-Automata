@@ -76,11 +76,19 @@ const predict = function(cellset, x, y) {
       var output = tf.tidy(
             () => tf.tensor2d(inputs, [1, nc]).matMul(w2).dataSync()[0]
       );
+
       if (values == "discrete") {
             if (output >= 0) {
                   output = 1;
             } else if (output < 0) {
                   output = -1;
+            }
+      }
+      if (enable_limits) {
+            if (output < limits[0]) {
+                  output = limits[0];
+            } else if (output > limits[1]) {
+                  output = limits[1];
             }
       }
 
