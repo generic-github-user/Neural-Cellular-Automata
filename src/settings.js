@@ -3,13 +3,13 @@ var resolution = {
       "y": 20
 };
 var range = true;
-var block_size = 5;
+var block_size = 3;
 var neighbor_cells = block_size ** 2;
 var ranges = {
       "weights": [-1, 1],
       "biases": [-1, 1]
 };
-var values = "discrete";
+var values = "continuous";
 var enable_limits = false;
 var limits = [-10, 10];
 
