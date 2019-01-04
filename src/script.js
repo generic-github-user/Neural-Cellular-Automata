@@ -60,15 +60,14 @@ const predict = function(cellset, x, y) {
                         "x": x + j - Math.floor(bs / 2),
                         "y": y + i - Math.floor(bs / 2)
                   };
-                  if (location.x < 0 || location.x >= cellset[0].length) {
-                        location.x = 0;
-                  }
-                  if (location.y < 0 || location.y >= cellset.length) {
-                        location.y = 0;
-                  }
-                  var cell = cellset[location.y][location.x];
-                  if (cell == undefined) {
-                        cell = 0;
+                  if (
+                        location.x < 0 || location.x >= cellset[0].length ||
+                        location.y < 0 || location.y >= cellset.length ||
+                        cell == undefined
+                  ) {
+                        var cell = 0;
+                  } else {
+                        var cell = cellset[location.y][location.x];
                   }
                   inputs.push(cell);
             }
