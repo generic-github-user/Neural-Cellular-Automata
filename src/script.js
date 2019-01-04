@@ -73,7 +73,9 @@ const predict = function(cellset, x, y) {
                   inputs.push(cell);
             }
       }
-      var output = tf.tensor2d(inputs, [1, nc]).matMul(w2).dataSync()[0];
+      var output = tf.tidy(
+            () => tf.tensor2d(inputs, [1, nc]).matMul(w2).dataSync()[0]
+      );
       if (values == "discrete") {
             if (output >= 0) {
                   output = 1;
